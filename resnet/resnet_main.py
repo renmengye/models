@@ -52,6 +52,8 @@ tf.app.flags.DEFINE_string("log_root", "",
 tf.app.flags.DEFINE_integer("num_gpus", 0,
                             "Number of gpus used for training. (0 or 1)")
 tf.app.flags.DEFINE_string("logs", "/u/mren/public_html/results", "")
+tf.app.flags.DEFINE_string("save_dir",
+                           "/ais/gobi4/mren/results/resnet-cifar", "")
 
 
 def gen_id(prefix):
@@ -173,7 +175,7 @@ def train(hps, exp_logger):
       summary_writer.add_summary(precision_summ, train_step)
       summary_writer.add_summary(summaries, train_step)
       # tf.logging.info("loss: %.3f, precision: %.3f\n" % (loss, precision))
-      log.info("loss: %.3f, precision: %.3f\n" % (loss, precision))
+      # log.info("loss: %.3f, precision: %.3f\n" % (loss, precision))
       exp_logger.log_train_ce(train_step, loss)
       exp_logger.log_train_acc(train_step, precision)
       summary_writer.flush()

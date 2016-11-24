@@ -63,10 +63,12 @@ def build_input(dataset, data_path, batch_size, mode):
                            [depth, image_size, image_size])
   # Convert from [depth, height, width] to [height, width, depth].
   image = tf.cast(tf.transpose(depth_major, [1, 2, 0]), tf.float32)
+  image = tf.Print(image, [tf.reduce_max(
+      image), tf.reduce_min(image), tf.reduce_mean(image)])
 
   if mode == 'train':
     image = tf.image.resize_image_with_crop_or_pad(
-        image, image_size+4, image_size+4)
+        image, image_size + 4, image_size + 4)
     image = tf.random_crop(image, [image_size, image_size, 3])
     image = tf.image.random_flip_left_right(image)
     # Brightness/saturation/constrast provides small gains .2%~.5% on cifar.
