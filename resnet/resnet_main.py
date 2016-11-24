@@ -61,6 +61,7 @@ def train(hps):
                            save_summaries_secs=60,
                            save_model_secs=300,
                            global_step=model.global_step)
+  print("Get supervisor")
   sess = sv.prepare_or_wait_for_session(
       config=tf.ConfigProto(allow_soft_placement=True))
 
