@@ -47,7 +47,7 @@ tf.app.flags.DEFINE_string("log_root", "",
                            "parent directory of FLAGS.train_dir/eval_dir.")
 tf.app.flags.DEFINE_integer("num_gpus", 0,
                             "Number of gpus used for training. (0 or 1)")
-tf.app.flags.DEFINE_string("logs", "/u/mren/public_html/results")
+tf.app.flags.DEFINE_string("logs", "/u/mren/public_html/results", "")
 
 
 def gen_id(prefix):
