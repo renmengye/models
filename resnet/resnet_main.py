@@ -15,6 +15,7 @@
 
 """ResNet Train/Eval module.
 """
+from __future__ import print_function
 import sys
 import time
 
@@ -90,7 +91,8 @@ def train(hps):
           tag='Precision', simple_value=precision)
       summary_writer.add_summary(precision_summ, train_step)
       summary_writer.add_summary(summaries, train_step)
-      tf.logging.info('loss: %.3f, precision: %.3f\n' % (loss, precision))
+      #tf.logging.info('loss: %.3f, precision: %.3f\n' % (loss, precision))
+      print('loss: %.3f, precision: %.3f\n' % (loss, precision))
       summary_writer.flush()
 
   sv.Stop()
