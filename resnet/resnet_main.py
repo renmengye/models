@@ -47,9 +47,11 @@ tf.app.flags.DEFINE_integer('num_gpus', 0,
 
 def train(hps):
   """Training loop."""
+  print("Building data")
   images, labels = cifar_input.build_input(
       FLAGS.dataset, FLAGS.train_data_path, hps.batch_size, FLAGS.mode)
   model = resnet_model.ResNet(hps, images, labels, FLAGS.mode)
+  print("Building graph")
   model.build_graph()
   summary_writer = tf.train.SummaryWriter(FLAGS.train_dir)
 
@@ -91,8 +93,8 @@ def train(hps):
           tag='Precision', simple_value=precision)
       summary_writer.add_summary(precision_summ, train_step)
       summary_writer.add_summary(summaries, train_step)
-      #tf.logging.info('loss: %.3f, precision: %.3f\n' % (loss, precision))
-      print('loss: %.3f, precision: %.3f\n' % (loss, precision))
+      tf.logging.info('loss: %.3f, precision: %.3f\n' % (loss, precision))
+      #print('loss: %.3f, precision: %.3f\n' % (loss, precision))
       summary_writer.flush()
 
   sv.Stop()
