@@ -123,7 +123,7 @@ class ExperimentLogger():
           niter + 1, datetime.datetime.now().isoformat(), acc))
 
 
-def train(hps):
+def train(hps, exp_logger):
   """Training loop."""
   log.info("Building data")
   images, labels = cifar_input.build_input(
@@ -177,11 +177,10 @@ def train(hps):
       exp_logger.log_train_ce(loss)
       exp_logger.log_train_acc(precision)
       summary_writer.flush()
-
   sv.Stop()
 
 
-def evaluate(hps):
+def evaluate(hps, exp_logger):
   """Eval loop."""
   images, labels = cifar_input.build_input(
       FLAGS.dataset, FLAGS.eval_data_path, hps.batch_size, FLAGS.mode)
@@ -273,9 +272,9 @@ def main(_):
 
   with tf.device(dev):
     if FLAGS.mode == "train":
-      train(hps)
+      train(hps, exp_logger)
     elif FLAGS.mode == "eval":
-      evaluate(hps)
+      evaluate(hps, exp_logger)
 
 
 if __name__ == "__main__":
