@@ -174,8 +174,8 @@ def train(hps, exp_logger):
       summary_writer.add_summary(summaries, train_step)
       # tf.logging.info("loss: %.3f, precision: %.3f\n" % (loss, precision))
       log.info("loss: %.3f, precision: %.3f\n" % (loss, precision))
-      exp_logger.log_train_ce(loss)
-      exp_logger.log_train_acc(precision)
+      exp_logger.log_train_ce(train_step, loss)
+      exp_logger.log_train_acc(train_step, precision)
       summary_writer.flush()
   sv.Stop()
 
@@ -231,7 +231,7 @@ def evaluate(hps, exp_logger):
     summary_writer.add_summary(summaries, train_step)
     log.info("loss: %.3f, precision: %.3f, best precision: %.3f\n" %
              (loss, precision, best_precision))
-    exp_logger.log_valid_acc(precision)
+    exp_logger.log_valid_acc(train_step, precision)
     summary_writer.flush()
 
     if FLAGS.eval_once:
