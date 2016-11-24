@@ -63,7 +63,7 @@ def build_input(dataset, data_path, batch_size, mode):
                            [depth, image_size, image_size])
   # Convert from [depth, height, width] to [height, width, depth].
   image = tf.cast(tf.transpose(depth_major, [1, 2, 0]), tf.float32)
-  image = tf.Print(image, [tf.reduce_max(
+  image = tf.Print(image, [1.0, tf.reduce_max(
       image), tf.reduce_min(image), tf.reduce_mean(image)])
 
   if mode == 'train':
@@ -76,6 +76,8 @@ def build_input(dataset, data_path, batch_size, mode):
     # image = tf.image.random_saturation(image, lower=0.5, upper=1.5)
     # image = tf.image.random_contrast(image, lower=0.2, upper=1.8)
     image = tf.image.per_image_whitening(image)
+    image = tf.Print(image, [2.0, tf.reduce_max(
+        image), tf.reduce_min(image), tf.reduce_mean(image)])
 
     example_queue = tf.RandomShuffleQueue(
         capacity=16 * batch_size,
