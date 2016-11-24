@@ -253,6 +253,10 @@ def main(_):
   elif FLAGS.dataset == "cifar100":
     num_classes = 100
 
+  exp_id = gen_id()
+  log.info("Experiment ID {}".format(exp_id))
+  exp_logger = ExperimentLogger(os.path.join(FLAGS.logs, exp_id))
+
   hps = resnet_model.HParams(batch_size=batch_size,
                              num_classes=num_classes,
                              min_lrn_rate=0.0001,
