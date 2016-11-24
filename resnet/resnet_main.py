@@ -16,8 +16,12 @@
 """ResNet Train/Eval module.
 """
 from __future__ import print_function
+
+import os
 import sys
+import datetime
 import time
+
 
 import cifar_input
 import numpy as np
