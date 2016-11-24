@@ -253,7 +253,7 @@ def main(_):
   elif FLAGS.dataset == "cifar100":
     num_classes = 100
 
-  exp_id = gen_id()
+  exp_id = gen_id("resnet-cifar10")
   log.info("Experiment ID {}".format(exp_id))
   exp_logger = ExperimentLogger(os.path.join(FLAGS.logs, exp_id))
 
