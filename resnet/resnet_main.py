@@ -66,12 +66,13 @@ def train(hps):
 
   step = 0
   lrn_rate = 0.1
-
+  print("Start")
   while not sv.should_stop():
     (_, summaries, loss, predictions, truth, train_step) = sess.run(
         [model.train_op, model.summaries, model.cost, model.predictions,
          model.labels, model.global_step],
         feed_dict={model.lrn_rate: lrn_rate})
+    print(("loss", loss))
 
     if train_step < 40000:
       lrn_rate = 0.1
